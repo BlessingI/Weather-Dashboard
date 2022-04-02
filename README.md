@@ -26,4 +26,4 @@ THEN I am again presented with current and future conditions for that city
     https://github.com/BlessingI/Weather-Dashboard.git
 
 ## Web Site link
-    https://blessingi.github.io/Work-Day-Scheduler/
+    https://blessingi.github.io/Weather-Dashboard/
