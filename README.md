@@ -23,7 +23,7 @@ THEN I am again presented with current and future conditions for that city
 02 April 2022
 
 ## Repository link
-    https://github.com/BlessingI/Work-Day-Scheduler.git
+    https://github.com/BlessingI/Weather-Dashboard.git
 
 ## Web Site link
     https://blessingi.github.io/Work-Day-Scheduler/
