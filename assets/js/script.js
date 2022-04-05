@@ -6,7 +6,8 @@ let temperature = document.querySelector('.temp')
 let wind = document.querySelector('.wind')
 let humidity = document.querySelector('.humidity')
 let uvIndex= document.querySelector('.uvIndex')
-// let locationIcon = document.querySelector('.weather-icon')
+
+let firstTemp = document.querySelector('.firsttemp')
 
 //getting and displaying date
 var today = new Date(); 
@@ -37,6 +38,7 @@ const saveToList = (event) => {
     // call api
     getCityInUSWeather(typedInput)
     getUVI()
+    getFiveDaysFocast(typedInput)
 }
 
 
@@ -85,8 +87,24 @@ const getUVI = () => {
         
 }
 
+//five days Focast
+const getFiveDaysFocast = (city) => {
+    const fiveDays = "https://api.openweathermap.org/data/2.5/forecast?q=" + city +",us&lat=35&lon=139&cnt=5&appid=396a111563a02c226f022b998b1b69da"
 
+    fetch(fiveDays)
+        .then(function(response) {
+            if(response.ok) {
+                response.json().then(function(data){
+                    console.log(data)
+                    firstTemp.textContent= "Temp: " + data.list[0].main.temp + "°F"
+                })
+            }
+        })
+}
 
 
 
 button.addEventListener('click', saveToList)
+
+
+
