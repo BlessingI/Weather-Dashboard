@@ -6,6 +6,7 @@ let temperature = document.querySelector('.temp')
 let wind = document.querySelector('.wind')
 let humidity = document.querySelector('.humidity')
 let uvIndex= document.querySelector('.uvIndex')
+// let locationIcon = document.querySelector('.weather-icon')
 
 //getting and displaying date
 var today = new Date(); 
@@ -47,12 +48,21 @@ const getCityInUSWeather = (city) => {
         .then(function(response) {
         if (response.ok) {
             response.json().then(function(data){
-                apiName.textContent = data.name + " (" + todaysDate + ")";
+                let locationIcon = document.createElement('div')
+                // let img = document.createElement('img');
+                const {icon} = data.weather[0];
+               
+
+                locationIcon.innerHTML = `<img src=https://openweathermap.org/img/wn/${icon}@2x.png>;`
+                
+
+                apiName.textContent = data.name + " (" + todaysDate + ") ";
+                apiName.appendChild(locationIcon)
                 temperature.textContent = "Temp: " + data.main.temp + "°F";
                 wind.textContent = "Wind: " + data.wind.speed + " MPH";
                 humidity.textContent = "Humidity: " + data.main.humidity + " %";
+            
             })
-
         }
     })
 }
@@ -74,10 +84,6 @@ const getUVI = () => {
         })
         
 }
-
-
-
-
 
 
 
