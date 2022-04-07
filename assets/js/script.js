@@ -82,9 +82,11 @@ const saveToList = (event) => {
     cityDiv.classList.add('bg-secondary')
     cityDiv.classList.add('py-2')
     cityDiv.classList.add('my-2')
+    cityDiv.classList.add('targetButton')
     citiesbox.appendChild(cityDiv)
 
     searchBar.value=""
+
 
     // call api
     getCityInUSWeather(typedInput)
@@ -96,11 +98,12 @@ const saveToList = (event) => {
 
 citiesbox.addEventListener('click', (event)=> {
     event.preventDefault()
-    let citiesTypedInput = cityDiv.textContent.trim()
-    console.log(citiesTypedInput)
+    let countryInput = event.target.innerHTML  
 
     // call api
-    // getCityInUSWeather(citiesTypedInput)
+    getCityInUSWeather(countryInput)
+    getUVI()
+    getFiveDaysFocast(countryInput)
 })
 
 
