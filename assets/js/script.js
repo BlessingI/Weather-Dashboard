@@ -68,12 +68,14 @@ let next4dayDd = nextday4.getDate() + '/' + (nextday4.getMonth()+1 )+ '/' + next
 let next5dayDd = nextday5.getDate() + '/' + (nextday5.getMonth()+1 )+ '/' + nextday5.getFullYear()
 
 
+let cityDiv
 
+//save element to list
 const saveToList = (event) => {
     event.preventDefault()
     let typedInput = searchBar.value
 
-    let cityDiv = document.createElement('p')
+    cityDiv = document.createElement('p')
     cityDiv.textContent = typedInput
 
     cityDiv.classList.add('rounded')
@@ -82,13 +84,26 @@ const saveToList = (event) => {
     cityDiv.classList.add('my-2')
     citiesbox.appendChild(cityDiv)
 
-
+    searchBar.value=""
 
     // call api
     getCityInUSWeather(typedInput)
     getUVI()
     getFiveDaysFocast(typedInput)
 }
+
+
+
+citiesbox.addEventListener('click', (event)=> {
+    event.preventDefault()
+    let citiesTypedInput = cityDiv.textContent.trim()
+    console.log(citiesTypedInput)
+
+    // call api
+    // getCityInUSWeather(citiesTypedInput)
+})
+
+
 
 
 // fetch Api
@@ -103,7 +118,7 @@ const getCityInUSWeather = (city) => {
                 const {icon} = data.weather[0];
                
 
-                locationIcon.innerHTML = `<img src=https://openweathermap.org/img/wn/${icon}@2x.png>;`
+                locationIcon.innerHTML = `<img src=https://openweathermap.org/img/wn/${icon}@2x.png>`
                 
 
                 apiName.textContent = data.name + " (" + todaysDate + ") ";
@@ -143,7 +158,6 @@ const getFiveDaysFocast = (city) => {
         .then(function(response) {
             if(response.ok) {
                 response.json().then(function(data){
-                    console.log(data)
                     //pull out temp for 5 days
                     firstTemp.textContent= "Temp: " + data.list[0].main.temp + "°F"
                     secondTemp.textContent= "Temp: " + data.list[1].main.temp + "°F"
@@ -176,7 +190,7 @@ const getFiveDaysFocast = (city) => {
                     //day one icon
                     const iconparty = data.list[0].weather[0].icon;
                     let locationIcon1 = document.createElement('div')
-                    locationIcon1.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty+"@2x.png>;"
+                    locationIcon1.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty+"@2x.png>"
                    
                     firstIcon1.textContent = ""
                     firstIcon1.appendChild(locationIcon1)
@@ -184,7 +198,7 @@ const getFiveDaysFocast = (city) => {
                     //day two icon
                     const iconparty2 = data.list[1].weather[0].icon;
                     let locationIcon2 = document.createElement('div')
-                    locationIcon2.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty2+"@2x.png>;"
+                    locationIcon2.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty2+"@2x.png>"
                    
                     secondIcon1.textContent = ""
                     secondIcon1.appendChild(locationIcon2)
@@ -192,7 +206,7 @@ const getFiveDaysFocast = (city) => {
                     //day three icon
                     const iconparty3 = data.list[2].weather[0].icon;
                     let locationIcon3 = document.createElement('div')
-                    locationIcon3.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty3+"@2x.png>;"
+                    locationIcon3.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty3+"@2x.png>"
                    
                     thirdIcon1.textContent = ""
                     thirdIcon1.appendChild(locationIcon3)
@@ -201,7 +215,7 @@ const getFiveDaysFocast = (city) => {
                     //day four icon
                     const iconparty4 = data.list[3].weather[0].icon;
                     let locationIcon4 = document.createElement('div')
-                    locationIcon4.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty4+"@2x.png>;"
+                    locationIcon4.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty4+"@2x.png>"
                    
                     fourthIcon1.textContent = ""
                     fourthIcon1.appendChild(locationIcon4)
@@ -209,9 +223,8 @@ const getFiveDaysFocast = (city) => {
 
                     //day five icon
                     const iconparty5 = data.list[4].weather[0].icon;
-                    console.log(iconparty5)
                     let locationIcon5 = document.createElement('div')
-                    locationIcon5.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty5+"@2x.png>;"
+                    locationIcon5.innerHTML= "<img src=https://openweathermap.org/img/wn/"+iconparty5+"@2x.png>"
                    
                     fifthIcon1.textContent = ""
                     fifthIcon1.appendChild(locationIcon5)

@@ -7,3 +7,9 @@ header {
     border: 3px solid transparent;
     background-clip:padding-box;
   }
+
+
+.citiesbox p {
+    cursor: pointer;
+}
+
