@@ -168,7 +168,7 @@ const getCityInUSWeather = (city) => {
         .then(function(response) {
         if (response.ok) {
             response.json().then(function(data){
-                let locationIcon = document.createElement('div')
+                let locationIcon = document.createElement('span')
                 const {icon} = data.weather[0];
                
 
