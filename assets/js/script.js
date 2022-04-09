@@ -69,6 +69,7 @@ let next5dayDd = nextday5.getDate() + '/' + (nextday5.getMonth()+1 )+ '/' + next
 
 
 let cityDiv
+let scoreList = []
 
 //save element to list
 const saveToList = (event) => {
@@ -92,11 +93,46 @@ const saveToList = (event) => {
 
     searchBar.value=""
 
+    let init = cityDiv.textContent
+    console.log(init)
+    scoreList.push({
+        initials: init
+    })
+
+    citiesbox.innerHTML="";
+    for (let i = 0; i < scoreList.length; i++) {
+        let li = document.createElement("p");
+        li.className = "rounded btn-secondary py-2 my-2 targetButton";
+        li.textContent = `${scoreList[i].initials}`;
+        citiesbox.append(li);
+    }
+
+    console.log(citiesbox)
+    storeScores()
 
     // call api
     getCityInUSWeather(typedInput)
     getUVI()
     getFiveDaysFocast(typedInput)
+
+}
+
+
+function storeScores() {
+    localStorage.setItem("scoreList", JSON.stringify(scoreList));
+}
+
+
+
+function displayScores() {
+    // Get stored scores from localStorage
+    // Parsing the JSON string to an object
+    let storedScoreList = JSON.parse(localStorage.getItem("scoreList"));
+
+    // If scores were retrieved from localStorage, update the scorelist array to it
+    if (storedScoreList !== null) {
+        scoreList = storedScoreList;
+    }
 }
 
 
@@ -248,5 +284,5 @@ const getFiveDaysFocast = (city) => {
 
 button.addEventListener('click', saveToList)
 
-
+displayScores()
 
