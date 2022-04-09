@@ -103,7 +103,7 @@ const saveToList = (event) => {
     for (let i = 0; i < scoreList.length; i++) {
         let li = document.createElement("p");
         li.className = "rounded btn-secondary py-2 my-2 targetButton";
-        li.textContent = `${scoreList[i].initials}`;
+        li.textContent = `${scoreList[i].initials}`;    
         citiesbox.append(li);
     }
 
@@ -133,6 +133,16 @@ function displayScores() {
     if (storedScoreList !== null) {
         scoreList = storedScoreList;
     }
+
+
+    for (let i = 0; i < scoreList.length; i++) {
+        let li = document.createElement("p");
+        li.className = "rounded btn-secondary py-2 my-2 targetButton";
+        li.textContent = `${scoreList[i].initials}`;
+        citiesbox.append(li);
+    }
+
+
 }
 
 
