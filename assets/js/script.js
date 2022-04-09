@@ -95,7 +95,6 @@ const saveToList = (event) => {
     searchBar.value=""
 
     let init = cityDiv.textContent
-    console.log(init)
     scoreList.push({
         initials: init
     })
@@ -107,8 +106,6 @@ const saveToList = (event) => {
         li.textContent = `${scoreList[i].initials}`;    
         citiesbox.append(li);
     }
-
-    console.log(citiesbox)
     storeScores()
 
     // call api
@@ -183,6 +180,8 @@ const getCityInUSWeather = (city) => {
                 humidity.textContent = "Humidity: " + data.main.humidity + " %";
             
             })
+        } else {
+            alert('Error: ' + city + " " + response.statusText)
         }
     })
 }
@@ -197,7 +196,6 @@ const getUVI = () => {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data){
-                    console.log(data)
                     uvNumber.textContent = data.current.uvi
                     uvIndex.textContent = "UV Index: ";
                     uvIndex.appendChild(uvNumber)
