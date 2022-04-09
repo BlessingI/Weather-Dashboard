@@ -75,6 +75,11 @@ const saveToList = (event) => {
     event.preventDefault()
     let typedInput = searchBar.value
 
+    if(searchBar.value == ""){
+        alert("Please input a US city")
+        citiesbox.appendChild(searchBar.value)
+    }
+
     cityDiv = document.createElement('p')
     cityDiv.textContent = typedInput
 
