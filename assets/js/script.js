@@ -6,6 +6,7 @@ let temperature = document.querySelector('.temp')
 let wind = document.querySelector('.wind')
 let humidity = document.querySelector('.humidity')
 let uvIndex= document.querySelector('.uvIndex')
+let uvNumber = document.querySelector('.uvNumber')
 
 let firstTemp = document.querySelector('.firsttemp')
 let secondTemp = document.querySelector('.secondtemp')
@@ -190,13 +191,26 @@ const getCityInUSWeather = (city) => {
 
 // UV index
 const getUVI = () => {
-    const uviUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=396a111563a02c226f022b998b1b69da"
+    const uviUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&appid=396a111563a02c226f022b998b1b69da"
 
     fetch(uviUrl)
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data){
-                    uvIndex.textContent = "UV Index: " + data.current.uvi;
+                    console.log(data)
+                    uvNumber.textContent = data.current.uvi
+                    uvIndex.textContent = "UV Index: ";
+                    uvIndex.appendChild(uvNumber)
+                    uvNumber.className = "rounded"
+
+                    if(uvNumber.textContent >=0 && uvNumber.textContent <=4) {
+                        uvNumber.style.backgroundColor = "green"
+                    } else if (uvNumber.textContent >=5 && uvNumber.textContent<=7) {
+                        uvNumber.style.backgroundColor = "orange"
+                    } else {
+                        uvNumber.style.backgroundColor = "red"
+                    }
+                        
                 })
 
             }
